@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"/>
+    <script type = "text/javascript" src="jscript.js"></script>
+    <title>Document</title>
+
+</head>
+<body>
+
+
+    <div id = "bloc_questionnaire">
+        <div id = "pluplu">
+            <a href = "#">GO</a>
+        </div>
+
+        <div id = "sensitive_bloc" class = "deactivate">
+            
+        </div>
+    
+        <div id = "arrows">
+            <span id="left-arrow"><input style = "font-weight:bold; font-size:20px;margin-right:20px;" type = "button" value = "<-" onclick = "left_arrow()"/></span>
+            <span id = "right-arrow"><input style = "font-weight:bold; font-size:20px; margin-left:20px;" type = "button" value = "->" onclick = "right_arrow()"/></span>     
+
+        </div>
+        <div id="special_button"> </div>
+    </div>
+        
+    <div id = "table_section">
+
+        <div id = "fill_validate"></div>
+
+        <div id = "family_validate"></div>
+            
+        <div id = "friends_validate"></div>
+        
+    
+    </div>
+
+    <div id = "myDiv">
+
+    </div>
+
+    <div id = "myChart">
+
+    </div>
+</body>
+</html>
+
+<div id  = "magie">
+    <p>This paragraph is showing then disappearing</p>
+    <div id = "family_validate">
+
+    </div>
+
+</div>
+
+
+           <!-- <div id = "bloc_question_1" class = "activate">
+                <div class = "question_label">
+                    <span class = "question_lib">Question 1</span>
+                </div>
+                        <p class = "question">
+                            Faites vous partie d'une association?
+                        </p>
+                        <p class = "options">                            <input type = "radio" id = "association_1" name="association" value = "Oui" onclick = "integrate()"/>
+                            <label for ="association_1">Oui</label>
+                            <input type = "radio" id = "association_2" name ="association" value = "Non" onclick = "main()"/>
+                            <label for = "association_2">Non</label>
+                        </p>
+            </div>-->
+
+            <!--
+        </div>
+
+        <div id = "bloc_question_1">
+            <div class = "question_label">
+                <span class = "question_lib">Question 1</span>
+            </div>
+                    <p>
+                        Faites vous partie d'une association?
+                        <input type = "radio" id = "association_1" name="association" value = "Yes" onclick = "fill()"/>
+                        <label for ="association_1">Oui</label>
+                        <input type = "radio" id = "association_2" name ="association" value = "No" onclick = "main()"/>
+                        <label for = "association_2">Non</label>
+                    </p>
+
+        </div>
+
+        <div id="bloc_question_2" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">
+                    <span class = "question_lib">Question 2</span>
+            </div>
+                    <p>
+                        Quelle est votre Religion?
+                        <input type = "radio" id = "religion_1" name = "religion" value = "Chretien"/>
+                        <label for="religion_1">Chretien</label>
+                        <input type = "radio" id = "religion_2" name = "religion" value = "Musulman"/>
+                        <label for="religion_2">Musulman</label>
+                        <input type = "radio" id = "religion_3" name = "religion" value = "Juif"/>
+                        <label for="religion_3">Juif</label>
+                        <input type = "radio" id = "religion_4" name = "religion" value = "Bouddhiste" />
+                        <label for="religion_4">Bouddhiste</label>
+                        <input type = "radio" id = "religion_5" name = "religion" value = "Pentecotiste"/>
+                        <label for="religion_5">Pentecotiste</label>
+                        <input type = "radio" id = "religion_6" name = "religion" value = "Aucun"/>
+                        <label for = "religion_6">Aucun</label>
+                    </p>
+        </div>
+
+        <div id = "bloc_question_3" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 3</span>
+            </div>  
+
+            <div id = "question">
+                <p>
+                    Avez vous un business?
+
+                    <input type = "radio" id="business_1" name = "business" value = "Yes">
+                    <label for="business_1">Oui</label>
+                    <input type = "radio" id="business_2" name = "business" value = "No">
+                    <label for = "business_2">Non</label>
+                </p>
+            </div>
+        </div>
+
+        <div id = "bloc_question_4" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 4</span>
+            </div>  
+
+            <div id = "question">
+                <p>
+                    Prenez vous des vacances?
+
+                    <input type = "radio" id="holiday_1" name = "holiday" value = "Yes">
+                    <label for="holiday_1">Oui</label>
+                    <input type = "radio" id="holiday_2" name = "holiday" value = "No">
+                    <label for = "holiday_2">Non</label>
+                </p>
+            </div>
+        </div>
+
+        <div id = "bloc_question_5" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 5</span>
+            </div>
+            <div id = "question">
+                <p>
+                    Faites vous partie d'une tontine ?
+
+                    <input type ="radio" id = "tontine_1" name = "tontine" value ="Yes">
+                    <label for = "tontine_1">Oui</label>
+
+                    <input type = "radio" id = "tontine_2" name = "tontine" value = "No"> 
+                    <label for = "tontine_2">Non</label>
+                </p>
+            </div>
+        </div>
+
+        <div id = "bloc_question_6" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 6</span>
+            </div>
+            <div id = "question">
+                <p>
+                    Pratiquez vous un sport ?
+
+                    <input type ="radio" id = "sport_1" name = "sport" value ="Yes">
+                    <label for = "sport_1">Oui</label>
+
+                    <input type = "radio" id = "sport_2" name = "sport" value = "No"> 
+                    <label for = "sport_2">Non</label>
+                </p>
+            </div>
+        </div>
+        
+
+        <div id = "bloc_question_7" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 7</span>
+            </div>
+            <div id = "question">
+                <p>
+                    Investissez vous dans votre sante ?
+                    <input type ="radio" id = "sante_1" name = "sante" value ="Yes">
+                    <label for = "sante_1">Oui</label>
+
+                    <input type = "radio" id = "sante_2" name = "sante" value = "No"> 
+                    <label for = "sante_2">Non</label>
+                </p>
+            </div>
+        </div>
+
+        <div id = "bloc_question_8" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 8</span>
+            </div>  
+
+            <div class = "question">
+                <p>
+                    Pensez vous regulierement a votre nutrition?
+
+                    <input type = "radio" id="nutrition_1" name = "nutrition" value = "Yes">
+                    <label for="nutrition_1">Oui</label>
+                    <input type = "radio" id="nutrition_2" name = "nutrition" value = "No">
+                    <label for = "nutrition_2">Non</label>
+                </p>
+            </div>
+        </div>
+
+        <div id = "bloc_question_9" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 9</span>
+            </div>  
+
+            <div class = "question">
+                <p>
+                    Avez vous une famille?
+
+                    <input type = "radio" id="family_1" name = "family" value = "Yes">
+                    <label for="family_1">Oui</label>
+                    <input type = "radio" id="family_2" name = "family" value = "No">
+                    <label for = "family_2">Non</label>
+                </p>
+            </div>
+        </div>
+        
+        <div id = "bloc_question_10" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 10</span>
+            </div>  
+
+            <div id = "question">
+                <p>
+                    Avez vous des amis?
+
+                    <input type = "radio" id="friend_1" name = "friend" value = "Yes"/>
+                    <label for="friend_1">Oui</label>
+                    <input type = "radio" id="friend_2" name = "friend" value = "No"/>
+                    <label for = "friend_2">Non</label>
+                </p>
+            </div>
+        </div>
+
+        <div id = "bloc_question_11" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 11</span>
+            </div>  
+
+            <div class = "question">
+                <p>
+                    Entrez le nombre d'amis(a separer par une virgule)<br/>
+                    <input type = "text" id = "friends_members" placeholder = "Separate by commas. Ex: 'Stella,Lena,Florence,Kaya'" size = "50" onchange="friends_validate()"/>
+                </p>
+            </div>
+        </div>
+
+        <div id = "bloc_question_12" class = "deactivate hide">
+            <div class = "question_label">
+                <span class = "question_lib">Question 12</span>
+            </div>  
+
+            <div id = "question">
+                <p>
+                    Entrez les membres de la famille(a separer par une virgule)<br/>
+                    <input type = "text" id = "family_members" placeholder = "Separate by commas. Ex: 'Stella,Lena,Florence,Kaya'" size = "50" onchange="friends_validate()"/>
+                </p>
+            </div>
+        </div>-->
+
+        <!--<div id = "arrows">
+            <span id="left-arrow"><input style = "font-weight:bold; font-size:20px;margin-right:20px;" type = "button" value = "&lt;" onclick = "left_arrow()"/></span>
+            <span id = "right-arrow"><input style = "font-weight:bold; font-size:20px; margin-left:20px;" type = "button" value = "&gt;" onclick = "right_arrow()"/></span>
+        </div>-->
