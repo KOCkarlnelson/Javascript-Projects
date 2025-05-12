@@ -168,11 +168,11 @@ function get_a_elts(){
       }
   }
 
-  //document.getElementById('a_total_entree').innerHTML = a_total_entree;
-  //document.getElementById('a_total_sortie').innerHTML = a_total_sortie;
+  document.getElementById('a_total_entree').innerHTML = a_total_entree;
+  document.getElementById('a_total_sortie').innerHTML = a_total_sortie;
   diff_1 = a_total_entree - a_total_sortie;
 
-/*  document.getElementById('diff_1').innerHTML = diff_1;
+  document.getElementById('diff_1').innerHTML = diff_1;
   if(diff_1 == 0){
       document.getElementById('action_1').innerHTML = "Nul- augmenter les entrees";
       action_1 = "Nul- augmenter les entrees";
@@ -184,7 +184,7 @@ function get_a_elts(){
       document.getElementById('action_1').innerHTML = "besoin de +" + adjust;
       action_1 = "besoin de + " + adjust;
   }
-*/
+
 }
 
 function get_e_elts(){
@@ -193,7 +193,6 @@ function get_e_elts(){
   e_entree = [];
   e_sortie = [];
   e_diff = [];
-  console.log("Come on");
 
   for(let i = 0; i < ligne_up; i++){
 
@@ -208,7 +207,7 @@ function get_e_elts(){
       e_diff.push(e_entree[i] - e_sortie[i]);
       document.getElementById(char_diff).innerHTML = e_diff[i];
      
-
+    
       e_total_entree += e_entree[i];
       e_total_sortie += e_sortie[i];
 
