@@ -5,7 +5,7 @@ const MAX_MAX = 13;
 
 let splitted_value_friend = "";
 let splitted_value_family = "";
-
+let button_elt = document.createElement('button');
 /*
 
 Business section (fill) : colonne 14, ligne_up(...)
@@ -41,8 +41,8 @@ prefixes:
   family_member_t_e="family_member_t_e_",
   family_member_t_s="family_member_t_s_";
 
-  a_family_diff 
-  a_family_action 
+  "a_family_diff" 
+  "a_family_action" 
 
 family_a_entree = [];
 family_e_entree = [];
@@ -70,7 +70,7 @@ splitted_value_friend;
     friend_member_t_e="friend_member_t_e_",
     friend_member_t_s="friend_member_t_s_";
 
-let prefix_diff = "f_a_diff_";
+    let prefix_diff = "f_a_diff_";
     let prefix_action = "f_a_action_";
 
 */
@@ -103,32 +103,199 @@ let sante;
 let nutrition;
 let table_rep_questions = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
-const question =[
-  {
-  bloc_question:1,
-  question_lib: "Question",
-  question: "Faites vous partie d'une association?",
-  name: "association",
-  options: 2,
-  values : ["Yes","No"]
-},
-{
-  bloc_question:2,
-  question_lib: "Question",
-  question: "Quelle est votre religion ?",
-  name: "eglise",
-  options: 6,
-  values : ["Chretien","Musulman","Juif","Bouddhiste","Pentecotiste","Aucun"]
-},
-{
-  bloc_question:3,
-  question_lib: "Question",
-  question: "Quelle est votre religion ?",
-  name: "eglise",
-  options: 6,
-  values : ["Chretien","Musulman","Juif","Bouddhiste","Pentecotiste","Aucun"]
+let a_entree = [];
+let e_entree = [];
+let t_entree = [];
+let count_entree = 0;
+let a_sortie = [];
+let e_sortie = [];
+let t_sortie = [];
+let  count_sortie = 0;
+
+let a_diff = [];
+let a_act = [];
+let e_diff = [];
+let e_act = [];
+let t_diff = [];
+let t_act = [];
+
+let a_total_entree = 0;
+let e_total_entree = 0;
+let t_total_entree = 0;
+let a_total_sortie = 0;
+let e_total_sortie = 0;
+let t_total_sortie = 0;
+
+let diff_1 = 0;
+let action_1 = "";
+let diff_2 = 0;
+let action_2 = "";
+let diff_3 = 0;
+let action_3 = "";
+let tab_elts = "";
+let ligne = tab_elts.length;
+let ligne_up = ligne + MAX_MAX;
+
+
+function get_a_elts(){
+  a_total_entree = 0;
+  a_total_sortie = 0;
+  a_entree = [];
+  a_sortie = [];
+  a_diff = []; 
+
+  for(let i = 0; i < ligne_up; i++){
+
+      let char_entree = "a_entree_" + (i+1);
+      let char_sortie = "a_sortie_" + (i+1);
+      let char_diff = "a_diff_" + (i+1);
+      let char_action = "a_action_" + (i+1);
+      a_entree.push(document.getElementById(char_entree).value); 
+      a_sortie.push(document.getElementById(char_sortie).value);
+     // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
+      a_diff.push(a_entree[i] - a_sortie[i]);
+      a_total_entree += a_entree[i];
+      a_total_sortie += a_sortie[i];
+
+
+      if(a_diff[i]  == 0){
+          document.getElementById(char_action).innerHTML = "Nul- augmenter les entrees";
+      }else if(a_diff[i] > 0){
+          document.getElementById(char_action).innerHTML = "Aucune";
+      }else{
+          let adjust = 0 - a_diff[i];
+          document.getElementById(char_action).innerHTML = "besoin de  +" + adjust;
+      }
+  }
+
+  //document.getElementById('a_total_entree').innerHTML = a_total_entree;
+  //document.getElementById('a_total_sortie').innerHTML = a_total_sortie;
+  diff_1 = a_total_entree - a_total_sortie;
+
+/*  document.getElementById('diff_1').innerHTML = diff_1;
+  if(diff_1 == 0){
+      document.getElementById('action_1').innerHTML = "Nul- augmenter les entrees";
+      action_1 = "Nul- augmenter les entrees";
+  }else if(diff_1 > 0){
+      document.getElementById('action_1').innerHTML = "Aucune";
+      action_1 = "Aucune";
+  }else{
+      let adjust = 0 - diff_1;
+      document.getElementById('action_1').innerHTML = "besoin de +" + adjust;
+      action_1 = "besoin de + " + adjust;
+  }
+*/
 }
-];
+
+function get_e_elts(){
+  e_total_entree = 0;
+  e_total_sortie = 0;
+  e_entree = [];
+  e_sortie = [];
+  e_diff = [];
+  console.log("Come on");
+
+  for(let i = 0; i < ligne_up; i++){
+
+      let char_entree = "e_entree_" + (i+1);
+      let char_sortie = "e_sortie_" + (i+1);
+      let char_diff = "e_diff_" + (i+1);
+      let char_action = "e_action_" + (i+1);
+      e_entree.push(document.getElementById(char_entree).value); 
+      console.log(e_entree[i]);
+      e_sortie.push(document.getElementById(char_sortie).value);
+     // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
+      e_diff.push(e_entree[i] - e_sortie[i]);
+      document.getElementById(char_diff).innerHTML = e_diff[i];
+     
+
+      e_total_entree += e_entree[i];
+      e_total_sortie += e_sortie[i];
+
+
+      if(e_diff[i]  == 0){
+          document.getElementById(char_action).innerHTML = "Nul- augmenter les entrees";
+      }else if(e_diff[i] > 0){
+          document.getElementById(char_action).innerHTML = "Aucune";
+      }else{
+          let adjust = 0 - e_diff[i];
+          document.getElementById(char_action).innerHTML = "besoin de  +" + adjust;
+      }
+  }
+
+  //document.getElementById('e_total_entree').innerHTML = e_total_entree;
+  //document.getElementById('e_total_sortie').innerHTML = e_total_sortie;
+  diff_2 = e_total_entree - e_total_sortie;
+
+  document.getElementById('diff_2').innerHTML = diff_2;
+  if(diff_2 == 0){
+      document.getElementById('action_2').innerHTML = "Nul- augmenter les entrees";
+      action_2 = "Nul- augmenter les entrees";
+  }else if(diff_2 > 0){
+      document.getElementById('action_2').innerHTML = "Aucune";
+      action_2 = "Aucune";
+  }else{
+      let adjust = 0 - diff_2;
+      document.getElementById('action_2').innerHTML = "besoin de +" + adjust;
+      action_2 = "besoin de + " + adjust;
+  }
+
+
+}
+
+function get_t_elts(){
+
+  t_total_entree = 0;
+  t_total_sortie = 0;
+  t_entree = [];
+  t_sortie = [];
+  t_diff = [];
+
+  for(let i = 0; i < ligne_up; i++){
+
+      let char_entree = "t_entree_" + (i+1);
+      let char_sortie = "t_sortie_" + (i+1);
+      let char_diff = "t_diff_" + (i+1);
+      let char_action = "t_action_" + (i+1);
+      t_entree.push(document.getElementById(char_entree).value); 
+      t_sortie.push(document.getElementById(char_sortie).value);
+     // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
+      t_diff.push(t_entree[i] - t_sortie[i]);
+    //  console.log(e_diff[i] + "vaut ");
+      document.getElementById(char_diff).innerHTML = t_diff[i];
+      t_total_entree += t_entree[i];
+      t_total_sortie += t_sortie[i];
+
+
+      if(t_diff[i]  == 0){
+          document.getElementById(char_action).innerHTML = "Nul- augmenter les entrees";
+      }else if(t_diff[i] > 0){
+          document.getElementById(char_action).innerHTML = "Aucune";
+      }else{
+          let adjust = 0 - t_diff[i];
+          document.getElementById(char_action).innerHTML = "besoin de  +" + adjust;
+      }
+  }
+
+  document.getElementById('t_total_entree').innerHTML = t_total_entree;
+  document.getElementById('t_total_sortie').innerHTML = t_total_sortie;
+  diff_3 = t_total_entree - t_total_sortie;
+
+  document.getElementById('diff_3').innerHTML = diff_3;
+  if(diff_3 == 0){
+      document.getElementById('action_3').innerHTML = "Nul- augmenter les entrees";
+      action_3 = "Nul- augmenter les entrees";
+  }else if(diff_3 > 0){
+      document.getElementById('action_3').innerHTML = "Aucune";
+      action_3 = "Aucune";
+  }else{
+      let adjust = 0 - diff_3;
+      document.getElementById('action_3').innerHTML = "besoin de +" + adjust;
+      action_3 = "besoin de + " + adjust;
+  }
+
+
+}
 
 /*
 function initialize(table,taille){
@@ -261,6 +428,12 @@ function initialize_table(tr,taille){
   }
 }
 
+function get_elts(){
+  get_a_elts();
+  get_e_elts();
+  get_t_elts();
+}
+
 function fill(){
   let th_first_row = [];
   let td_second_row = [];
@@ -278,10 +451,10 @@ function fill(){
   let t_entree = "t_entree_";
   let t_sortie = "t_sortie_";
   integrate();
-  let tab_elts = fill_bloc_1();
-  let ligne = tab_elts.length;
+  tab_elts = fill_bloc_1();
+  ligne = tab_elts.length;
   let colonne = 14;
-  let ligne_up = ligne + MAX_MAX;
+  ligne_up = ligne + MAX_MAX;
   let matrice = [];
   create_matrice(matrice,ligne,colonne);
   let m = 1;
@@ -545,17 +718,64 @@ function fill(){
       }
     }
 
+    let total_tr = document.createElement('tr');
+    let total = document.createElement('td');
+    let text_node = document.createTextNode('Total');
+    total.appendChild(text_node); 
+    let a_total_entree = document.createElement('td');
+    a_total_entree.setAttribute('id','a_total_entree');
+    let a_total_sortie = document.createElement('td');
+    a_total_sortie.setAttribute('id','a_total_sortie');
+    let diff_1 = document.createElement('td');
+    diff_1.setAttribute('id','diff_1');
+    let action_1 = document.createElement('td');
+    action_1.setAttribute('id','action_1');
+    let e_total_entree = document.createElement('td');
+    e_total_entree.setAttribute('id','e_total_entree');
+    let e_total_sortie = document.createElement('td');
+    e_total_sortie.setAttribute('id','e_total_sortie');
+    let diff_2 = document.createElement('td');
+    diff_2.setAttribute('id','diff_2');
+    let action_2 = document.createElement('td');
+    action_2.setAttribute('id','action_2');
+    let t_total_entree = document.createElement('td');
+    t_total_entree.setAttribute('id','t_total_entree');
+    let t_total_sortie = document.createElement('td');
+    t_total_sortie.setAttribute('id','t_total_sortie');
+    let diff_3 = document.createElement('td');
+    diff_3.setAttribute('id','diff_3');
+    let action_3 = document.createElement('td');
+    action_3.setAttribute('id','action_3');
+
+    total_tr.appendChild(total);
+    total_tr.appendChild(a_total_entree);
+    total_tr.appendChild(a_total_sortie);
+    total_tr.appendChild(diff_1);
+    total_tr.appendChild(action_1);
+    total_tr.appendChild(e_total_entree);
+    total_tr.appendChild(e_total_sortie);
+    total_tr.appendChild(diff_2);
+    total_tr.appendChild(action_2);
+    total_tr.appendChild(t_total_entree);
+    total_tr.appendChild(t_total_sortie);
+    total_tr.appendChild(diff_3);
+    total_tr.appendChild(action_3);
+
     //telechargement des tr dans la table
     for(let i = 0 ; i < ligne_up+1; i++)
       table_fill.appendChild(matrice[i][0]);
 
-    document.getElementById('fill_validate').appendChild(table_fill);
+      table_fill.appendChild(total_tr);
 
-  for(let i = 0 ; i <22; i++){
-    for(let j = 0; j <= colonne; j++){
-      console.log(matrice[i][j]);
-    }
-  }
+    document.getElementById('fill_validate').appendChild(table_fill);
+    button_elt = document.createElement('input');
+
+    button_elt.setAttribute('type','button');    
+    button_elt.setAttribute('value','Calculate');
+    button_elt.setAttribute('onclick','get_elts()');     
+    document.getElementById('fill_validate').appendChild(button_elt);
+
+
  }
 }
   
