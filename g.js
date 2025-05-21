@@ -1188,3 +1188,505 @@
    }
   }
     
+
+
+
+
+
+  function family_elts(){
+
+    family_member_a_e = "family_member_a_e_",
+    family_member_a_s = "family_member_a_s_",
+    
+    a_entree = [];
+    a_sortie = [];
+  
+    let family_a_entree = [];
+  
+    let family_a_sortie = [];
+    let family_a_diff = [];
+    let family_a_action = [];
+    let a_family_total_entree = "a_family_total_entree";
+    let a_family_total_sortie = "a_family_total_sortie";
+    let a_f_t_entree = [];
+    let a_f_t_sortie = [];
+  
+    family_member_e_e = "family_member_e_e_";
+    family_member_e_s = "family_member_e_s_";
+    
+    e_entree = [];
+    e_sortie = [];
+  
+    
+    let family_e_entree = [];
+    let family_e_sortie = [];
+    let family_e_diff = [];
+    let e_family_total_entree = "e_family_total_entree";
+    let e_family_total_sortie = "e_family_total_sortie";
+    let e_f_t_entree = [];
+    let e_f_t_sortie = [];
+  
+  
+    family_member_t_e = "family_member_e_e_",
+    family_member_t_s = "family_member_e_s_",
+    
+  
+    t_entree = [];
+    t_sortie = [];
+   
+    let family_t_entree = [];
+    let family_t_sortie = [];
+    let family_t_diff = [];
+    let t_family_total_entree = "t_family_total_entree";
+    let t_family_total_sortie = "t_family_total_sortie";
+    let t_f_t_entree = [];
+    let t_f_t_sortie = [];
+  
+    let t_family_diff = "t_family_diff_";
+    let t_family_action = "t_family_action_";
+  
+    let family_action_a = "f_action_1";
+    let family_action_e = "f_action_2";
+    let family_action_t = "f_action_3";
+  
+    let char_entree_a;
+    let char_sortie_a;
+    let char_action_a;
+    let char_entree_e;
+    let char_sortie_e;
+    let char_action_e;
+    let char_entree_t;
+    let char_sortie_t;
+    let char_action_t;
+  
+  
+  
+    let m = 1;
+  
+    for(let i = 0; i < splitted_value_family.length; i++){
+  
+       char_entree_a = family_member_a_e + (i+1);
+       char_sortie_a = family_member_a_s + (i+1);
+       char_action_a = family_action_a;
+  
+      // Diff et action sont de grosse salopes . Elles savent pas compter (incrementer les valeurs de diff et action)
+      a_entree.push(document.getElementById(char_entree_a).value);
+      a_sortie.push(document.getElementById(char_sortie_a).value);
+     // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
+  
+      family_a_diff.push(a_entree[i] - a_sortie[i]);
+      a_f_t_entree += a_entree[i];
+      a_f_t_sortie += a_sortie[i];
+  
+      document.getElementById(a_family_total_entree).innerHTML = a_f_t_entree;
+      document.getElementById(a_family_total_sortie).innerHTML = a_f_t_sortie;
+      diff_1 = a_total_entree - a_total_sortie;
+          
+      char_entree_e = family_member_e_e + (i+1);
+      char_sortie_e = family_member_e_s + (i+1);
+      char_action_e = family_action_e + (i+1);
+  
+      if(family_a_diff[i]  == 0){
+        document.getElementById(char_action_a).innerHTML = "Nul- augmenter les entrees";
+    }else if(family_a_diff[i] > 0){
+        document.getElementById(char_action_a).innerHTML = "Aucune";
+    }else{
+        let adjust = 0 - family_a_diff[i];
+        document.getElementById(char_action_a).innerHTML = "besoin de  +" + adjust;
+    }
+  
+    a_entree = [];
+    a_sortie = [];
+  
+       e_entree.push(document.getElementById(char_entree_e).value);
+       e_sortie.push(document.getElementById(char_sortie_e).value);
+      // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
+       family_e_diff.push(e_entree[i] - e_sortie[i]);
+       e_f_t_entree += e_entree[i];
+       e_f_t_sortie += e_sortie[i];
+  
+       document.getElementById("f_e_total_entree").innerHTML = e_f_t_entree;
+       document.getElementById("f_e_total_sortie").innerHTML = e_f_t_sortie;
+       diff_2 = e_total_entree - e_total_sortie;
+   
+       
+    if(family_e_diff[i]  == 0){
+        document.getElementById(char_action_e).innerHTML = "Nul- augmenter les entrees";
+    }else if(family_e_diff[i] > 0){
+        document.getElementById(char_action_e).innerHTML = "Aucune";
+    }else{
+        let adjust = 0 - family_e_diff[i];
+        document.getElementById(char_action_e).innerHTML = "besoin de  +" + adjust;
+    }
+       
+       char_entree_t = family_member_t_e + (i+1);
+       char_sortie_t = family_member_t_s + (i+1);
+       char_action_t = family_action_t;
+  
+      // Diff et action sont de grosse salopes . Elles savent pas compter (incrementer les valeurs de diff et action)
+      t_entree.push(document.getElementById(char_entree_t).value);
+      t_sortie.push(document.getElementById(char_sortie_t).value);
+     // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
+  
+      family_t_diff.push(t_entree[i] - t_sortie[i]);
+      t_f_t_entree += t_entree[i];
+      t_f_t_sortie += t_sortie[i];
+  
+      document.getElementById("f_t_total_entree").innerHTML = t_f_t_entree;
+      document.getElementById("f_t_total_sortie").innerHTML = t_f_t_sortie;
+      diff_3 = t_total_entree - t_total_sortie;
+    
+      if(family_t_diff[i]  == 0){
+        document.getElementById(char_action_t).innerHTML = "Nul- augmenter les entrees";
+    }else if(family_t_diff[i] > 0){
+        document.getElementById(char_action_t).innerHTML = "Aucune";
+    }else{
+        let adjust = 0 - family_t_diff[i];
+        document.getElementById(char_action_t).innerHTML = "besoin de  +" + adjust;
+    }
+  
+  
+  }
+  
+  document.getElementById('f_diff_1').innerHTML = diff_1;
+  if(diff_1 == 0){
+      document.getElementById('f_action_1').innerHTML = "Nul- augmenter les entrees";
+      action_1 = "Nul- augmenter les entrees";
+  }else if(diff_1 > 0){
+      document.getElementById('f_action_1').innerHTML = "Aucune";
+      action_1 = "Aucune";
+  }else{
+      let adjust = 0 - diff_1;
+      document.getElementById('f_action_1').innerHTML = "besoin de +" + adjust;
+      action_1 = "besoin de + " + adjust;
+  }
+  
+  document.getElementById('f_diff_2').innerHTML = diff_2;
+  if(diff_2 == 0){
+      document.getElementById('f_action_2').innerHTML = "Nul- augmenter les entrees";
+      action_2 = "Nul- augmenter les entrees";
+  }else if(diff_2 > 0){
+      document.getElementById('f_action_2').innerHTML = "Aucune";
+      action_2 = "Aucune";
+  }else{
+      let adjust = 0 - diff_2;
+      document.getElementById('f_action_2').innerHTML = "besoin de +" + adjust;
+      action_2 = "besoin de + " + adjust;
+  }
+  
+  document.getElementById('f_diff_3').innerHTML = diff_3;
+  
+  if(diff_3 == 0){
+      document.getElementById('f_action_3').innerHTML = "Nul- augmenter les entrees";
+      action_3 = "Nul- augmenter les entrees";
+  }else if(diff_3 > 0){
+      document.getElementById('f_action_3').innerHTML = "Aucune";
+      action_3 = "Aucune";
+  }else{
+      let adjust = 0 - diff_3;
+      document.getElementById('f_action_3').innerHTML = "besoin de +" + adjust;
+      action_3 = "besoin de + " + adjust;
+  }
+  
+  
+  }
+  
+
+  
+
+  function to_filter(){
+
+    for(let i = 0 ; i < table_quest.length; i++){
+      if(table_rep_questions[i] == "Oui" && table_quest[i] != "Business"){
+        table_of_elements.push(table_quest[i]);
+      }else if(i == 2){
+        table_of_elements.push(table_rep_questions[i]);
+      }else if(table_quest[i] == "Business"){
+        continue;
+      }
+    }
+  }
+
+
+
+  function friends_validate(){
+    if(print_once_friend == false){
+      print_once_friend = true;
+      if(elt2 == "")
+       elt2 = document.getElementById('friends_members').value;
+      splitted_value_friend = elt2.split(',');
+      let table_elt;
+      let prefix = "friend_member_";
+      let friend_member_a_e="friend_member_a_e_",
+      friend_member_a_s="friend_member_a_s_",
+      friend_member_e_e="friend_member_e_e_",
+      friend_member_e_s="friend_member_e_s_",
+      friend_member_t_e="friend_member_t_e_",
+      friend_member_t_s="friend_member_t_s_";
+      
+   
+      let prefix_diff_a = "a_friend_diff_";
+      let prefix_action_a = "a_friend_action_";
+    
+      let prefix_diff_e = "e_friend_diff_";
+      let prefix_action_e = "e_friend_action_";
+    
+      let prefix_diff_t = "t_friend_diff_";
+      let prefix_action_t = "t_friend_action_";
+    
+      let tr_first_element;
+    
+      let th_first_element = [];
+    
+      function initialize_table_f(tr,taille){
+        for(let i = 0; i < taille ; i++){
+          tr.push(10);
+      }
+    }
+    
+      initialize_table_f(th_first_element,10);
+    
+      
+      let td_first_element = [];
+    
+      initialize_table_f(td_first_element,13);
+    
+      
+      const MAX_COL = 12;
+    
+    
+    //  let tr_values = [splitted_value_family.length];
+    //  let td_values = new Array(12);
+    
+      let mat_tr_td = [];
+      let string_char = "";
+    
+      for(let i = 0; i < splitted_value_friend.length; i++){
+        mat_tr_td.push(new Array (MAX_COL+1));
+      }
+    
+      for(let i = 0; i < splitted_value_friend.length; i++){
+        let  k = 0;
+        for(let j = 1; j <= MAX_COL+1 ; j++){
+          mat_tr_td[i][k] = document.createElement('tr');
+          mat_tr_td[i][j] = document.createElement('td');
+        }
+      }
+    
+    //  console.log(mat_tr_td[0][0]);
+    //  console.log(mat_tr_td[1][0]);
+    //  console.log(mat_tr_td[2][0]);
+      let tr_second_row;
+    
+      table_elt = document.createElement('table');
+      tr_first_element= document.createElement('tr');
+    //  td_first_element = document.createElement('td');
+    //  td_fst_element = document.createElement('td');
+      for(let j = 0 ; j < th_first_element.length; j++){
+          th_first_element[j] = document.createElement('th');
+      }  
+       
+    
+      th_first_element[0].innerText = 'Amis';
+      th_first_element[1].innerText = 'Argent';
+      th_first_element[1].setAttribute('colspan','2');
+      th_first_element[2].innerText = 'Diff';
+      th_first_element[3].innerText = 'Action';
+      th_first_element[4].innerText = 'Energie';
+      th_first_element[4].setAttribute('colspan','2');
+      th_first_element[5].innerText = 'Diff';
+      th_first_element[6].innerText = 'Action';
+      th_first_element[7].innerText = 'Temps';
+      th_first_element[7].setAttribute('colspan','2');
+      th_first_element[8].innerText = 'Diff';
+      th_first_element[9].innerText = 'Action';
+    
+      
+      for(let k = 0; k < td_first_element.length; k++){
+        td_first_element[k] = document.createElement('td');
+      }
+    
+      td_first_element[0].innerText = '';
+      td_first_element[0].setAttribute('class','vide');
+      td_first_element[1].innerText = 'Entree';
+      td_first_element[2].innerText ='Sortie';
+      td_first_element[3].innerText = '';
+      td_first_element[3].setAttribute('class','vide');
+      td_first_element[4].innerText ='';
+      td_first_element[4].setAttribute('class','vide');
+      td_first_element[5].innerText = 'Entree';
+      td_first_element[6].innerText = 'Sortie';
+      td_first_element[7].innerText = '';
+      td_first_element[7].setAttribute('class','vide');
+      td_first_element[8].innerText = '';
+      td_first_element[8].setAttribute('class','vide');
+      td_first_element[9].innerText ='Entree';
+      td_first_element[10].innerText = 'Sortie';
+      td_first_element[11].innerText = '';
+      td_first_element[11].setAttribute('class','vide');
+      td_first_element[12].innerText ='';
+      td_first_element[12].setAttribute('class','vide');
+    
+      let m = 0;
+      let n = 0;
+      for(let i = 0; i < splitted_value_friend.length; i++){
+          m++;
+          n++;
+          let input_type_1;
+          let input_type_2;
+          let input_type_3;
+          let input_type_4;
+          let input_type_5;
+          let input_type_6;
+    
+            mat_tr_td[i][0] = document.createElement('tr');
+    
+            mat_tr_td[i][1] = document.createElement('td');
+            mat_tr_td[i][1].innerText = splitted_value_friend[i];
+            mat_tr_td[i][2] = document.createElement('td');
+            input_type_1 = document.createElement('input');
+            input_type_1.setAttribute('type','number');
+            input_type_1.setAttribute('id',friend_member_a_e + m);
+            input_type_1.setAttribute('size','12');
+            mat_tr_td[i][2].appendChild(input_type_1);
+            mat_tr_td[i][3]= document.createElement('td');
+            input_type_2 = document.createElement('input');
+            input_type_2.setAttribute('type','number');
+            input_type_2.setAttribute('id',friend_member_a_s + m);
+            input_type_2.setAttribute('size','12');
+            mat_tr_td[i][3].appendChild(input_type_2);
+            mat_tr_td[i][4] = document.createElement('td');
+            mat_tr_td[i][4].setAttribute('id',prefix_diff_a + n);
+            mat_tr_td[i][5] = document.createElement('td');
+            mat_tr_td[i][5].setAttribute('id',prefix_action_a + n);
+            n++;
+            mat_tr_td[i][6] = document.createElement('td');
+            input_type_3 = document.createElement('input');
+            input_type_3.setAttribute('type','number');
+            input_type_3.setAttribute('id',friend_member_e_e + m);
+            input_type_3.setAttribute('size','12');
+            mat_tr_td[i][6].appendChild(input_type_3);
+            mat_tr_td[i][7] = document.createElement('td');
+            input_type_4 = document.createElement('input');
+            input_type_4.setAttribute('type','number');
+            input_type_4.setAttribute('id',friend_member_e_s + m);
+            input_type_4.setAttribute('size','12');
+            mat_tr_td[i][7].appendChild(input_type_4);
+    
+            mat_tr_td[i][8] = document.createElement('td');
+            mat_tr_td[i][8].setAttribute('id',prefix_diff_e + n);
+    
+            mat_tr_td[i][9] = document.createElement('td');
+            mat_tr_td[i][9].setAttribute('id',prefix_action_e + n);
+            n++;
+    
+            input_type_5 = document.createElement('input');
+            input_type_5.setAttribute('type','number');
+            input_type_5.setAttribute('id',friend_member_t_e + m);
+            input_type_5.setAttribute('size','12');
+    
+            mat_tr_td[i][10] = document.createElement('td');
+            mat_tr_td[i][10].appendChild(input_type_5);
+           // mat_tr_td[i][8].appendChild(input_type_5);
+    
+    //        mat_tr_td[i][9] = document.createElement('td');
+    //        mat_tr_td[i][9].setAttribute('id',prefix_diff + n);
+    //        mat_tr_td[i][10] = document.createElement('td');
+            mat_tr_td[i][11] = document.createElement('td');
+    
+            input_type_6 = document.createElement('input');
+            input_type_6.setAttribute('type','number');
+            input_type_6.setAttribute('id',friend_member_t_s + m);
+            input_type_6.setAttribute('size','12');
+            mat_tr_td[i][11].appendChild(input_type_6);
+    
+            mat_tr_td[i][12] = document.createElement('td');
+            mat_tr_td[i][12].setAttribute('id',prefix_diff_t + n );
+            mat_tr_td[i][13] = document.createElement('td');
+            mat_tr_td[i][13].setAttribute('id',prefix_action_t + n);
+            
+            for(let k = 0; k < th_first_element.length; k++)
+              tr_first_element.appendChild(th_first_element[k]);
+      
+            tr_second_row = document.createElement('tr');
+    
+            for(let j = 0; j < td_first_element.length; j++){
+              tr_second_row.appendChild(td_first_element[j]);
+            }
+    
+            for(let i = 0 ; i < splitted_value_friend.length; i++){
+                let k = 0;
+                for(let j = 1; j <= MAX_COL+1 ; j++){
+                  mat_tr_td[i][k].appendChild(mat_tr_td[i][j]);
+                }
+            }
+  
+            table_elt.appendChild(tr_first_element);
+            table_elt.appendChild(tr_second_row);
+  
+            for(let i = 0; i < splitted_value_friend.length; i++){
+              let k = 0;
+              table_elt.appendChild(mat_tr_td[i][k]);
+            }
+  
+  
+  
+            let total_tr = document.createElement('tr');
+            let total = document.createElement('td');
+            let text_node = document.createTextNode('Total');
+            total.appendChild(text_node); 
+            a_total_entree = document.createElement('td');
+            a_total_entree.setAttribute('id','a_friend_total_entree');
+            a_total_sortie = document.createElement('td');
+            a_total_sortie.setAttribute('id','a_friend_total_sortie');
+            let diff_1 = document.createElement('td');
+            diff_1.setAttribute('id','fr_diff_1');
+            let action_1 = document.createElement('td');
+            action_1.setAttribute('id','fr_action_1');
+            e_total_entree = document.createElement('td');
+            e_total_entree.setAttribute('id','e_friend_total_entree');
+            let e_total_sortie = document.createElement('td');
+            e_total_sortie.setAttribute('id','e_friend_total_sortie');
+            let diff_2 = document.createElement('td');
+            diff_2.setAttribute('id','fr_diff_2');
+            let action_2 = document.createElement('td');
+            action_2.setAttribute('id','fr_action_2');
+            t_total_entree = document.createElement('td');
+            t_total_entree.setAttribute('id','t_friend_total_entree');
+            t_total_sortie = document.createElement('td');
+            t_total_sortie.setAttribute('id','t_friend_total_sortie');
+            let diff_3 = document.createElement('td');
+            diff_3.setAttribute('id','fr_diff_3');
+            let action_3 = document.createElement('td');
+            action_3.setAttribute('id','fr_action_3');
+        
+            total_tr.appendChild(total);
+            total_tr.appendChild(a_total_entree);
+            total_tr.appendChild(a_total_sortie);
+            total_tr.appendChild(diff_1);
+            total_tr.appendChild(action_1);
+            total_tr.appendChild(e_total_entree);
+            total_tr.appendChild(e_total_sortie);
+            total_tr.appendChild(diff_2);
+            total_tr.appendChild(action_2);
+            total_tr.appendChild(t_total_entree);
+            total_tr.appendChild(t_total_sortie);
+            total_tr.appendChild(diff_3);
+            total_tr.appendChild(action_3);     
+  
+         }
+  
+            table_elt.appendChild(total_tr);
+            document.getElementById('friends_validate').appendChild(table_elt);  
+          
+            button_elt = document.createElement('input');
+  
+            button_elt.setAttribute('type','button');    
+            button_elt.setAttribute('value','Calculate');
+            button_elt.setAttribute('onclick','friends_elts()');
+            document.getElementById('friends_validate').appendChild(button_elt);
+            
+  
+        }
+      }
+  

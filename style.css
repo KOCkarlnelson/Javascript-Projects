@@ -52,6 +52,7 @@
     width:900px;
     margin:auto;
     height:400px;
+    margin-bottom: 100px;
 }
 
 
@@ -133,21 +134,36 @@ div[id ^= "bloc_question_"]:nth-child(1){
     transition: opacity 3s linear; 
 }
 
-.showher{
-    opacity:1;
-    transition: 1s opacity linear;
-}
-
-/*.showher:hover{
-    opacity:0;
-    transition: 1s opacity linear;
-}*/
-
-
 .activate{
     opacity:1;
     transition: opacity 3s linear;
 }
+
+
+#fill_validate{
+    margin-bottom: 20px;
+}
+
+#family_validate{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#friends_validate{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#button_fill{
+    margin-bottom: -20px;
+}
+#family_fill{
+    margin-bottom: -20px;
+}
+
+#friends_fill{
+    margin-top: 15px;
+}
+
 
 .non_visible{
     visibility: hidden;
