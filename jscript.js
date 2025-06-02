@@ -1288,7 +1288,7 @@ function chart(_input,tableau,num){
   document.getElementById(num).classList.add('activate');
   document.getElementById(num).classList.remove('deactivate');
   document.getElementById(num).style.marginTop = "20px";
-  
+
   document.getElementById('bloc_family_chart_a_entree').classList.add('activate');
   document.getElementById('bloc_family_chart_a_entree').classList.remove('deactivate');
   Plotly.newPlot(num, data, layout);
@@ -2853,7 +2853,7 @@ function inject(){
   bloc_friends_chart_a.appendChild(bloc_friends_chart_a_diff);
   
   let bloc_friends_chart_e = document.createElement('div');
-    bloc_friends_chart_a_entree.classList.add('deactivate');
+  bloc_friends_chart_a_entree.classList.add('deactivate');
     
   bloc_friends_chart_e.setAttribute('id','bloc_friends_chart_e');
   bloc_friends_chart_e.classList.add('activate');
@@ -3854,26 +3854,28 @@ function friends_validate(){
           let friends_button_a = document.createElement('div');
           friends_button_a.setAttribute('id','friends_button_a');
 
-          button_elt3 = document.createElement('input');
-          button_elt3.setAttribute('type','button');
-          button_elt3.setAttribute('value','Argent entree Chart');
+          let lien_3 = document.createTextNode('Argent Entree Chart');
+          button_elt3 = document.createElement('a');
+          button_elt3.setAttribute('href','#bloc_friends_chart_a_entree');
           button_elt3.setAttribute('class', 'c_button');
           button_elt3.setAttribute('onclick','chart(a_entree,splitted_value_friend,"bloc_friends_chart_a_entree")');
+          button_elt3.appendChild(lien_3);
           document.getElementById('friends_fill').appendChild(button_elt3);
             
-           button_elt4 = document.createElement('input');
-           button_elt4.setAttribute('type','button');
-           button_elt4.setAttribute('value','Argent Sortie Chart');
+           let lien_4 = document.createTextNode('Argent Sortie Chart');
+           button_elt4 = document.createElement('a');
+           button_elt4.setAttribute('href','#bloc_friends_chart_a_sortie');
            button_elt4.setAttribute('class', 'c_button');
            button_elt4.setAttribute('onclick','chart(a_sortie,splitted_value_friend,"bloc_friends_chart_a_sortie")');
+           button_elt4.appendChild(lien_4);
            document.getElementById('friends_fill').appendChild(button_elt4);
            
-           
-           button_elt5 = document.createElement('input');
-           button_elt5.setAttribute('type','button');
-           button_elt5.setAttribute('value','Argent Diff Chart');
+           let lien_5 = document.createTextNode('Argent Diff Chart');
+           button_elt5 = document.createElement('a');           
+           button_elt5.setAttribute('href','#bloc_friends_chart_a_diff');
            button_elt5.setAttribute('class', 'c_button');
            button_elt5.setAttribute('onclick','diff_chart("Amis Argent difference",a_diff,splitted_value_friend,"bloc_friends_chart_a_diff")');
+           button_elt5.appendChild(lien_5);
            document.getElementById('friends_fill').appendChild(button_elt5);
            
            friends_button_a.appendChild(button_elt3);
@@ -3884,24 +3886,27 @@ function friends_validate(){
 
            let friends_button_e = document.createElement('div');
            friends_button_e.setAttribute('id','friends_button_e');
-      
-           button_elt6 = document.createElement('input');
-           button_elt6.setAttribute('type','button');
-           button_elt6.setAttribute('value','Energie entree Chart');
+
+           let lien_6 = document.createTextNode('Energie Entree Chart');
+           button_elt6 = document.createElement('a');
+           button_elt6.setAttribute('href','#bloc_friends_chart_e_entree');
            button_elt6.setAttribute('class', 'c_button');
            button_elt6.setAttribute('onclick','chart(e_entree,splitted_value_friend,"bloc_friends_chart_e_entree")');
-       
-           button_elt7 = document.createElement('input');
-           button_elt7.setAttribute('type','button');
-           button_elt7.setAttribute('value','Energie Sortie Chart');
+           button_elt6.appendChild(lien_6);
+           
+           let lien_7 = document.createTextNode('Energie Sortie Chart');
+           button_elt7 = document.createElement('a');
+           button_elt7.setAttribute('href','#bloc_friends_chart_e_sortie');
            button_elt7.setAttribute('class', 'c_button');
            button_elt7.setAttribute('onclick','chart(e_sortie,splitted_value_friend,"bloc_friends_chart_e_sortie")');
-       
-           button_elt8 = document.createElement('input');
-           button_elt8.setAttribute('type','button');
-           button_elt8.setAttribute('value','Energie Diff Chart');
+           button_elt7.appendChild(lien_7);
+           
+           let lien_8 = document.createTextNode('Energie Diff Chart');
+           button_elt8 = document.createElement('a');
+           button_elt8.setAttribute('href','#bloc_friends_chart_e_diff');
            button_elt8.setAttribute('class', 'c_button');
            button_elt8.setAttribute('onclick','diff_chart("Amis Energie difference",e_diff,splitted_value_friend,"bloc_friends_chart_e_diff")');
+           button_elt8.appendChild(lien_8);
 
           friends_button_e.appendChild(button_elt6);
           friends_button_e.appendChild(button_elt7);
@@ -3910,45 +3915,54 @@ function friends_validate(){
            let friends_button_t = document.createElement('div');
            friends_button_t.setAttribute('id','friends_button_t');
 
-           button_elt9 = document.createElement('input');
-           button_elt9.setAttribute('type','button');
-           button_elt9.setAttribute('value','Temps entree Chart');
+           let lien_9 = document.createTextNode('Temps Entree Chart');
+           button_elt9 = document.createElement('a');
+           button_elt9.setAttribute('href','#bloc_friends_chart_t_entree');
            button_elt9.setAttribute('class', 'c_button');
            button_elt9.setAttribute('onclick','chart(t_entree,splitted_value_friend,"bloc_friends_chart_t_entree")');
-       
-           button_elt10 = document.createElement('input');
-           button_elt10.setAttribute('type','button');
-           button_elt10.setAttribute('value','Temps Sortie Chart');
+           button_elt9.appendChild(lien_9);
+
+
+           let lien_10 = document.createTextNode('Temps Sortie Chart');
+           button_elt10  = document.createElement('a');          
+           button_elt10.setAttribute('href','#bloc_friends_chart_t_sortie');
            button_elt10.setAttribute('class', 'c_button');
            button_elt10.setAttribute('onclick','chart(t_sortie,splitted_value_friend,"bloc_friends_chart_t_sortie")');     
-       
-           button_elt11 = document.createElement('input');
-           button_elt11.setAttribute('type','button');
-           button_elt11.setAttribute('value','Temps Diff Chart');
+           button_elt10.appendChild(lien_10);
+
+
+           let lien_11 = document.createTextNode('Temps Diff Chart');
+           button_elt11  = document.createElement('a');                     
+           button_elt11.setAttribute('href','#bloc_friends_chart_t_diff');
            button_elt11.setAttribute('class', 'c_button');
            button_elt11.setAttribute('onclick','diff_chart("Amis Temps difference",t_diff,splitted_value_friend,"bloc_friends_chart_t_diff")');
-          
+           button_elt11.appendChild(lien_11);
+           
            let bloc_button_1 = document.createElement('div');
            bloc_button_1.setAttribute('id','bloc_button_1');
        
-           button_elt12 = document.createElement('input');
-           button_elt12.setAttribute('type','button');
-           button_elt12.setAttribute('value','Argent Entree Bar');
+           let lien_12 = document.createTextNode('Argent Entree Bar');
+           button_elt12  = document.createElement('a');
+           button_elt12.setAttribute('href','#bloc_friends_bar_a_entree');
            button_elt12.setAttribute('class', 'c_button');
            button_elt12.setAttribute('onclick','bar(a_entree,splitted_value_friend,"Argent Entree Bar","bloc_friends_bar_a_entree")'); 
-       
-           button_elt13 = document.createElement('input');
-           button_elt13.setAttribute('type','button');
-           button_elt13.setAttribute('value','Argent Sortie Bar');
+           button_elt12.appendChild(lien_12); 
+           
+           let lien_13 = document.createTextNode('Argent Sortie Bar');
+           button_elt13  = document.createElement('a');
+           button_elt13.setAttribute('href','#bloc_friends_bar_a_sortie');
            button_elt13.setAttribute('class', 'c_button');
            button_elt13.setAttribute('onclick','bar(a_sortie,splitted_value_friend,"Argent Sortie Bar","bloc_friends_bar_a_sortie")');
-       
-           button_elt14 = document.createElement('input');
-           button_elt14.setAttribute('type','button');
+           button_elt13.appendChild(lien_13);
+          
+           let lien_14 = document.createTextNode('Energie Entree Bar');
+           button_elt14  = document.createElement('a');
+           button_elt14.setAttribute('href','#bloc_friends_bar_e_entree');
            button_elt14.setAttribute('value','Energie Entree Bar');
            button_elt14.setAttribute('class', 'c_button');
            button_elt14.setAttribute('onclick','bar(e_entree,splitted_value_friend,"Energie Entree Bar","bloc_friends_bar_e_entree")');
-       
+           button_elt14.appendChild(lien_14);       
+          
            bloc_button_1.appendChild(button_elt12);
            bloc_button_1.appendChild(button_elt13);
            bloc_button_1.appendChild(button_elt14);
@@ -3956,24 +3970,27 @@ function friends_validate(){
            let bloc_button_2 = document.createElement('div');
            bloc_button_2.setAttribute('id','bloc_button_2');
        
-           button_elt15 = document.createElement('input');
-           button_elt15.setAttribute('type','button');
-           button_elt15.setAttribute('value','Energie Sortie Bar');
+           let lien_15 = document.createTextNode('Energie Sortie Bar');
+           button_elt15  = document.createElement('a');
+           button_elt15.setAttribute('href','#bloc_friends_bar_e_sortie');
            button_elt15.setAttribute('class', 'c_button');
            button_elt15.setAttribute('onclick','bar(e_sortie,splitted_value_friend,"Energie Sortie Bar","bloc_friends_bar_e_sortie")');
-       
-           button_elt16 = document.createElement('input');
-           button_elt16.setAttribute('type','button');
-           button_elt16.setAttribute('value','Temps Entree Bar');
+           button_elt15.appendChild(lien_15);
+           
+           let lien_16 = document.createTextNode('Temps Entree Bar');
+           button_elt16  = document.createElement('a');
+           button_elt16.setAttribute('href','#bloc_friends_bar_t_entree');
            button_elt16.setAttribute('class', 'c_button');
            button_elt16.setAttribute('onclick','bar(t_entree,splitted_value_friend,"Temps Entree Bar","bloc_friends_bar_t_entree")');
-       
-           button_elt17 = document.createElement('input');
-           button_elt17.setAttribute('type','button');
-           button_elt17.setAttribute('value','Temps Sortie Bar');
+           button_elt16.appendChild(lien_16);
+           
+           let lien_17 = document.createTextNode('Temps Sortie Bar');
+           button_elt17  = document.createElement('a');
+           button_elt17.setAttribute('href','#bloc_friends_bar_t_sortie');
            button_elt17.setAttribute('class', 'c_button');
            button_elt17.setAttribute('onclick','bar(t_sortie,splitted_value_friend,"Temps Sortie Bar","bloc_friends_bar_t_sortie")');
-       
+           button_elt17.appendChild(lien_17);
+
            bloc_button_2.appendChild(button_elt15);
            bloc_button_2.appendChild(button_elt16);
            bloc_button_2.appendChild(button_elt17);

@@ -322,7 +322,6 @@ div[id ^= "bloc_question_"]:nth-child(1){
 }
 
 .charts{
-    margin-right: 100px;
     padding: 20px;
     text-align:center;
 }
@@ -381,6 +380,8 @@ div[id ^= "bloc_question_"]:nth-child(1){
     margin-right: 10px;
     border: 2px outset rgb(240,240,240);
     padding: 22px;
+    padding-left:25px;
+    padding-right:25px;
     background-color: rgb(240,240,240);
     margin-top:5px;
 }
