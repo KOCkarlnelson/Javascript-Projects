@@ -7,6 +7,41 @@
     margin : 20px;
 }
 
+#myDiv{
+    padding:25px;
+}
+
+
+#main_table,#family_table,#friends_table{
+    margin-left:-70px;
+}
+
+/* A special button to print the csv report*/
+#spec_button{
+    padding: 15px;
+    font-size: 17px;
+    display:block;
+    position:fixed;
+    left:0;
+    bottom:0;
+}
+
+#sensitive_info{
+    border: 1px solid black;
+    font-size:20px;
+}
+
+.ps{
+    color: green;
+    font-style:italic;
+    font-weight:bold;
+    text-decoration: underline;
+}
+
+.imp{
+    color:red;
+}
+
 #arrows{
     margin:auto;
     width:150px;
@@ -235,6 +270,11 @@ div[id ^= "bloc_question_"]:nth-child(1){
     justify-content:center;
 }
 
+#bloc_button_1{
+    margin-left: 5px;
+    margin-bottom:5px;
+}
+
 #bloc_family_chart_a, #bloc_family_chart_e,#bloc_family_chart_t{
     display:flex;
     justify-content:space-between;  
@@ -273,8 +313,12 @@ div[id ^= "bloc_question_"]:nth-child(1){
 
 .calcul{
     margin-right: 100px;
-    border: 2px solid black;
+    border: 2px outset black;
     padding: 20px;
+}
+
+.calcul:active{
+    border: 2px inset black;    
 }
 
 .charts{
@@ -285,8 +329,12 @@ div[id ^= "bloc_question_"]:nth-child(1){
 
 .random{
     margin-left: 100px;
-    border: 2px solid black;
+    border: 2px outset black;
     padding: 20px;
+}
+
+.random:active{
+    border: 2px inset black;
 }
 
 .banniere{
@@ -304,11 +352,42 @@ div[id ^= "bloc_question_"]:nth-child(1){
     margin:auto;
 }
 
+
 .c_button{
-    border: 2px solid black;
+    display:block;
+    text-decoration: none;
+    color:black;
+    font-weight:normal;
+    font-style:normal;
+    cursor:pointer;
+    margin-left:10px;
+    margin-right: 10px;
+    border: 2px outset rgb(240,240,240);
     padding: 20px;
+    background-color: rgb(240,240,240);
 }
 
+.c_button:active{
+    border: 2px inset rgb(240,240,240);
+}
+
+.c_button_b{
+    text-decoration: none;
+    color:black;
+    font-weight:normal;
+    font-style:normal;
+    cursor:pointer;
+    margin-left:10px;
+    margin-right: 10px;
+    border: 2px outset rgb(240,240,240);
+    padding: 22px;
+    background-color: rgb(240,240,240);
+    margin-top:5px;
+}
+
+.c_button_b:active{
+    border: 2px inset rgb(240,240,240);
+}
 
 #bloc_charts{
     margin-top:20px;
@@ -365,7 +444,7 @@ tr,td,th{
 
 #validate_button{
     position:absolute;
-    left: 575px;
+    left: 47%;
     top: 420px;
     padding:9px;
     font-size:17px;

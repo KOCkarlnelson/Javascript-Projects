@@ -1689,4 +1689,43 @@
   
         }
       }
-  
+      let tableau_initial_csv_format = [];
+
+      function from_id_to_bloc_to_csv(){
+        let table_origin = new Array((tab_elts.length)+2);
+        let footer = [];
+    
+        if(bool_for_case1 == true){
+        
+          table_origin[0] = header;
+    
+          for(let i = 1; i <= tab_elts.length ; i++){
+    //          table_origin[0] = new Array(COLONNE);
+              tableau_initial_csv_format = [];
+              tableau_initial_csv_format.push(tab_elts[i-1]);
+              for(let j = 1; j < COLONNE; j++){
+                if(tableau_initial[j].substring(0,7) == "a_diff_" || tableau_initial[j].substring(0,9) == "a_action_" || tableau_initial[j].substring(0,7) == "e_diff_" || tableau_initial[j].substring(0,9) == "e_action_" || tableau_initial[j].substring(0,7) == "t_diff_" || tableau_initial[j].substring(0,9) == "t_action_"){
+                  tableau_initial_csv_format.push(document.getElementById(tableau_initial[j] + parseInt(i)).textContent);
+               //   alert(document.getElementById(tableau_initial[j] + parseInt(i)).textContent);
+                }else{
+                tableau_initial_csv_format.push(document.getElementById(tableau_initial[j] + parseInt(i)).value);
+                }
+              }
+              table_origin[i] = tableau_initial_csv_format;
+              
+          }
+          footer.push("Total");
+          for(let j = 13; j < tableau_initial.length; j++){
+            footer.push(document.getElementById(tableau_initial[j]).textContent);
+          }
+          table_origin[table_origin.length - 1] = footer;
+        }else if(bool_for_case2 == true){
+    
+        }else if(bool_for_case3 == true){
+    
+        }else if(bool_for_case4 == true){
+    
+        }
+    
+        exportArrayToCsv(table_origin);
+      } 

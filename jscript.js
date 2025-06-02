@@ -3,6 +3,166 @@ const QUESTIONS = 12;
 const QUESTIONS_OBG = 9;
 const MAX_MAX = 13;
 
+function exportArrayToCsv(data, filename) {
+  const csvContent = data.map(row => row.join(',')).join('\n');
+  const encodedUri = encodeURI('data:text/csv;charset=utf-8,' + csvContent);
+  let link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', filename);
+  let text = document.createTextNode('Clickable link');
+  link.appendChild(text);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+
+// Example usage:
+const myArray = [
+  ['Name', 'Age', 'City'],
+  ['John Doe', 30, 'New York'],
+  ['Jane Smith', 25, 'London'],
+  ['Peter Jones', 40, 'Paris'],
+];
+
+
+// exportArrayToCsv(myArray);
+
+const COLONNE = 13;
+//Here, we  declarate tables with ids so that we can use them to create lines(table line) that we are going to use to create our CSV file
+let header = ["Domaine","Argent_Entree","Argent_Sortie","Argent_Difference","Argent_Action","Energie_Entree","Energie_Sortie","Energie_Difference","Energie_Action","Temps_Entree","Temps_Sortie","Temps_Difference","Temps_Action"];
+let tableau_initial = ["","a_entree_","a_sortie_","a_diff_","a_action_","e_entree_","e_sortie_","e_diff_","e_action_","t_entree_","t_sortie_","t_diff_","t_action_","a_total_entree","a_total_sortie","diff_1","action_1","e_total_entree","e_total_sortie","diff_2","action_2","t_total_entree","t_total_sortie","diff_3","action_3"];
+let tableau_family = ["","family_member_a_e_","family_member_a_s_","a_family_diff_","a_family_action_","family_member_e_e_","family_member_e_s_",
+  "e_family_diff_","e_family_action_","family_member_t_e_","family_member_t_s_","t_family_diff_","t_family_action_","a_family_total_entree","a_family_total_sortie","f_diff_1","f_action_1","e_family_total_entree","e_family_total_sortie","f_diff_2","f_action_2","t_family_total_entree","t_family_total_sortie","f_diff_3","f_action_3"];
+let tableau_amis = ["","friend_member_a_e_","friend_member_a_s_","a_friend_diff_","a_friend_action_","friend_member_e_e_","friend_member_e_s_",
+  "e_friend_diff_","e_friend_action_","friend_member_t_e_","friend_member_t_s_","t_friend_diff_","t_friend_action_","a_friend_total_entree","a_friend_total_sortie","fr_diff_1","fr_action_1","e_friend_total_entree","e_friend_total_sortie","fr_diff_2","fr_action_2","t_friend_total_entree","t_friend_total_sortie","fr_diff_3","fr_action_3"];
+
+
+
+  function fill_csv(array_type,tableau_ids,number1,number2,diff_,action_,diff2_,action2_,diff3_,action3_){
+    tableau_initial_csv_format = [];
+    table_origin = [];
+    footer = [];
+    table_origin = new Array((array_type.length)+2);
+
+    table_origin[0] = header;
+
+    for(let i = 1; i <= array_type.length ; i++){
+//          table_origin[0] = new Array(COLONNE);
+        tableau_initial_csv_format = [];
+        tableau_initial_csv_format.push(array_type[i-1]);
+        for(let j = 1; j < COLONNE; j++){
+          if(tableau_ids[j].substring(0,number1) == diff_ || tableau_ids[j].substring(0,number2) ==action_ || tableau_ids[j].substring(0,number1) == diff2_ || tableau_ids[j].substring(0,number2) == action2_ || tableau_ids[j].substring(0,number1) == diff3_ || tableau_ids[j].substring(0,number2) == action3_){
+            tableau_initial_csv_format.push(document.getElementById(tableau_ids[j] + parseInt(i)).textContent);
+         //   alert(document.getElementById(tableau_initial[j] + parseInt(i)).textContent);
+          }else{
+          tableau_initial_csv_format.push(document.getElementById(tableau_ids[j] + parseInt(i)).value);
+          }
+        }
+        table_origin[i] = tableau_initial_csv_format;
+        
+    }
+    footer.push("Total");
+    for(let j = 13; j < tableau_initial.length; j++){
+      footer.push(document.getElementById(tableau_ids[j]).textContent);
+    }
+    table_origin[table_origin.length - 1] = footer;
+
+    
+  }
+
+  let tableau_initial_csv_format = [];
+  let table_origin = [];
+  let footer = [];
+  function from_id_to_bloc_to_csv(){
+ 
+    if(bool_for_case1 == true){
+ 
+      fill_csv(tab_elts,tableau_initial,7,9,"a_diff_","a_action_","e_diff_","e_action_","t_diff_","t_action_");
+      exportArrayToCsv(table_origin,'output.csv');
+
+    }else if(bool_for_case2 == true){
+      fill_csv(tab_elts,tableau_initial,7,9,"a_diff_","a_action_","e_diff_","e_action_","t_diff_","t_action_");
+      exportArrayToCsv(table_origin,'output.csv');
+      fill_csv(splitted_value_family,tableau_family,14,16,"a_family_diff_","a_family_action_","e_family_diff_","e_family_action_","t_family_diff_","t_fanily_action_");
+      exportArrayToCsv(table_origin,'family.csv'); 
+    }else if(bool_for_case3 == true){
+      fill_csv(tab_elts,tableau_initial,7,9,"a_diff_","a_action_","e_diff_","e_action_","t_diff_","t_action_");
+      exportArrayToCsv(table_origin,'output.csv');
+      fill_csv(splitted_value_friend,tableau_amis,14,16,"a_friend_diff_","a_friend_action_","e_friend_diff_","e_friend_action_","t_friend_diff_","t_friend_action_");
+      exportArrayToCsv(table_origin,'friend.csv'); 
+    }else if(bool_for_case4 == true){
+
+      fill_csv(tab_elts,tableau_initial,7,9,"a_diff_","a_action_","e_diff_","e_action_","t_diff_","t_action_");
+      exportArrayToCsv(table_origin,'output.csv');
+      fill_csv(splitted_value_family,tableau_family,14,16,"a_family_diff_","a_family_action_","e_family_diff_","e_family_action_","t_family_diff_","t_fanily_action_");
+      exportArrayToCsv(table_origin,'family.csv'); 
+      fill_csv(splitted_value_friend,tableau_amis,14,16,"a_friend_diff_","a_friend_action_","e_friend_diff_","e_friend_action_","t_friend_diff_","t_friend_action_");
+      exportArrayToCsv(table_origin,'friend.csv'); 
+
+    }
+    
+  } 
+
+
+class LIGNE_AREA{
+
+    A_e;
+    A_s;
+    A_diff;
+    A_action; 
+    E_e;
+    E_s;
+    E_diff;
+    E_action; 
+    T_e;
+    T_s;
+    T_diff;
+    T_action; 
+    final_table = [];
+
+  constructor(domaine,id_A_e,id_A_s,id_A_diff,id_A_action,id_E_e,id_E_s,id_E_diff,id_E_action,id_T_e,id_T_s,id_T_diff,id_T_action,numero){
+    this.domaine = domaine;
+    this.id_A_e = id_A_e;
+    this.id_A_s = id_A_s;
+    this.id_A_diff = id_A_diff;
+    this.id_A_action = id_A_action;
+    this.id_E_e = id_E_e;
+    this.id_E_s = id_E_s;
+    this.id_E_diff = id_E_diff;
+    this.id_E_action = id_E_action;
+    this.id_T_e = id_T_e;
+    this.id_T_s = id_T_s;
+    this.id_T_diff = id_T_diff;
+    this.id_T_action = id_T_action;
+    this.numero = numero;
+  }
+
+
+  set_generic_attributes(){
+    this.A_e = document.getElementById(this.id_A_e + this.numero).value;
+    this.A_s = document.getElementById(this.id_A_s + this.numero).value;
+    this.A_diff = document.getElementById(this.id_A_diff + this.numero).value;
+    this.A_action = document.getElementById(this.id_A_action + this.numero).value;
+    this.E_e = document.getElementById(this.id_E_e + this.numero).value;
+    this.E_s = document.getElementById(this.id_E_s + this.numero).value;
+    this.E_diff = document.getElementById(this.id_E_diff + this.numero).value;
+    this.E_action = document.getElementById(this.id_E_action + this.numero).value;
+    this.T_e = document.getElementById(this.id_T_e + this.numero).value;
+    this.T_s = document.getElementById(this.id_T_s + this.numero).value;
+    this.T_diff = document.getElementById(this.id_T_diff + this.numero).value;
+    this.T_action = document.getElementById(this.id_T_action + this.numero).value;
+  }
+
+  set_table(){
+    this.final_table = [this.A_e,this.A_s,this.A_diff,this.A_action,this.E_e,this.E_s,this.E_diff,this.E_action,this.T_e,this.T_s,This.diff,This.action];
+
+    return this.final_table;
+  }
+}
+
+
+
 let splitted_value_friend = "";
 let splitted_value_family = "";
 let button_elt = document.createElement('button');
@@ -634,8 +794,8 @@ function get_a_elts(){
       a_entree.push(document.getElementById(char_entree).value); 
       a_sortie.push(document.getElementById(char_sortie).value);
      // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
-      a_diff.push(a_entree[i] - a_sortie[i]);
-      document.getElementById(char_diff).innerHTML = a_diff[i];
+      a_diff.push(parseInt(a_entree[i]) - parseInt(a_sortie[i]));
+      document.getElementById(char_diff).innerHTML = parseInt(a_diff[i]);
 
       a_total_entree += parseInt(a_entree[i]);
       a_total_sortie += parseInt(a_sortie[i]);
@@ -687,7 +847,7 @@ function get_e_elts(){
       console.log(e_entree[i]);
       e_sortie.push(document.getElementById(char_sortie).value);
      // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
-      e_diff.push(e_entree[i] - e_sortie[i]);
+      e_diff.push(parseInt(e_entree[i]) - parseInt(e_sortie[i]));
       document.getElementById(char_diff).innerHTML = e_diff[i];
      
     
@@ -742,7 +902,7 @@ function get_t_elts(){
       t_entree.push(document.getElementById(char_entree).value); 
       t_sortie.push(document.getElementById(char_sortie).value);
      // document.getElementById(char_entree).value = Math.ceil(Math.random()*100);
-      t_diff.push(t_entree[i] - t_sortie[i]);
+      t_diff.push(parseInt(t_entree[i]) - parseInt(t_sortie[i]));
     //  console.log(e_diff[i] + "vaut ");
       document.getElementById(char_diff).innerHTML = t_diff[i];
       t_total_entree += parseInt(t_entree[i]);
@@ -970,6 +1130,7 @@ function generate_elts_type(bloc_type,type_entree,type_sortie,type_diff,type_act
         document.getElementById(char_sortie).value = rand_s;
         diff.push(parseInt(entree[i]) - parseInt(sortie[i]));
         document.getElementById(char_diff).innerHTML = diff[i];
+
         total_entree += parseInt(entree[i]);
         total_sortie += parseInt(sortie[i]);
 
@@ -988,7 +1149,7 @@ function generate_elts_type(bloc_type,type_entree,type_sortie,type_diff,type_act
             document.getElementById(char_action).innerHTML = "besoin de  +" + adjust;
         }
     }
-  
+    
     document.getElementById(type_total_entree).innerHTML = total_entree; // var_a_tot_entree / var_e_tot_entree / var_t_tot_entree
     document.getElementById(type_total_sortie).innerHTML = total_sortie; // var_a_tot_sortie / var_e_tot_sortie / var_t_tot_sortie
     diff_1 = total_entree - total_sortie;
@@ -1124,11 +1285,12 @@ function chart(_input,tableau,num){
     width: 350
   };
 
-
   document.getElementById(num).classList.add('activate');
   document.getElementById(num).classList.remove('deactivate');
   document.getElementById(num).style.marginTop = "20px";
-
+  
+  document.getElementById('bloc_family_chart_a_entree').classList.add('activate');
+  document.getElementById('bloc_family_chart_a_entree').classList.remove('deactivate');
   Plotly.newPlot(num, data, layout);
 
 }
@@ -1537,6 +1699,8 @@ function fill(){
     button_elt.setAttribute('value','Calculer');
     button_elt.setAttribute('class','calcul');
     button_elt.setAttribute('onclick','get_elts()');
+    button_elt.setAttribute('title','Calcule apres avoir entre manuellement des valeurs');
+
     calcul.appendChild(button_elt);
     
     
@@ -1545,6 +1709,8 @@ function fill(){
     button_elt2.setAttribute('value', 'Random');
     button_elt2.setAttribute('class','random');
     button_elt2.setAttribute('onclick','random_generator()');
+    button_elt2.setAttribute('title','Calcule automatiquement');
+
     calcul.appendChild(button_elt2);
     
     document.getElementById('button_fill').appendChild(calcul);
@@ -1559,23 +1725,27 @@ function fill(){
     let text_chart = document.createTextNode('Charts/Graphiques');
     chart.appendChild(text_chart);
 
-    button_elt3 = document.createElement('input');
-    button_elt3.setAttribute('type','button');
-    button_elt3.setAttribute('value','Argent entree Chart');
+
+    let lien_3 = document.createTextNode('Argent entree Chart');
+    button_elt3 = document.createElement('a');
+    button_elt3.setAttribute('href','#bloc_chart_a_entree');
     button_elt3.setAttribute('class', 'c_button');
     button_elt3.setAttribute('onclick','chart(a_entree,tab_elts,"bloc_chart_a_entree")');
+    button_elt3.appendChild(lien_3);
 
-    button_elt4 = document.createElement('input');
-    button_elt4.setAttribute('type','button');
-    button_elt4.setAttribute('value','Argent Sortie Chart');
+    let lien_4 = document.createTextNode('Argent Sortie Chart');
+    button_elt4 = document.createElement('a');
+    button_elt4.setAttribute('href','#bloc_chart_a_sortie');
     button_elt4.setAttribute('class', 'c_button');
-    button_elt4.setAttribute('onclick','chart(a_sortie,tab_elts,"bloc_chart_a_sortie")');     
+    button_elt4.setAttribute('onclick','chart(a_sortie,tab_elts,"bloc_chart_a_sortie")');
+    button_elt4.appendChild(lien_4);     
 
-    button_elt5 = document.createElement('input');
-    button_elt5.setAttribute('type','button');
-    button_elt5.setAttribute('value','Argent Diff Chart');
+    let lien_5 = document.createTextNode('Argent Diff Chart');
+    button_elt5 = document.createElement('a');
+    button_elt5.setAttribute('href','#bloc_chart_a_diff');
     button_elt5.setAttribute('class', 'c_button');
     button_elt5.setAttribute('onclick','diff_chart("Argent - difference",a_diff,tab_elts,"bloc_chart_a_diff")');
+    button_elt5.appendChild(lien_5);
     
     bloc_button_a.appendChild(button_elt3);
     bloc_button_a.appendChild(button_elt4);
@@ -1588,22 +1758,26 @@ function fill(){
     let bloc_button_e = document.createElement('div');
     bloc_button_e.setAttribute('id','bloc_button_e');
 
-    button_elt6.setAttribute('type','button');
-    button_elt6.setAttribute('value','Energie entree Chart');
+    let lien_6 = document.createTextNode('Energie entree Chart');
+    button_elt6 = document.createElement('a');
+    button_elt6.setAttribute('href','#bloc_chart_e_entree');
     button_elt6.setAttribute('class', 'c_button');
     button_elt6.setAttribute('onclick','chart(e_entree,tab_elts,"bloc_chart_e_entree")');     
+    button_elt6.appendChild(lien_6);
 
-    button_elt7 = document.createElement('input');
-    button_elt7.setAttribute('type','button');
-    button_elt7.setAttribute('value','Energie Sortie Chart');
+    let lien_7 = document.createTextNode('Energie sortie Chart');
+    button_elt7 = document.createElement('a');
+    button_elt7.setAttribute('href','#bloc_chart_e_sortie');
     button_elt7.setAttribute('class', 'c_button');
     button_elt7.setAttribute('onclick','chart(e_sortie,tab_elts,"bloc_chart_e_sortie")');     
+    button_elt7.appendChild(lien_7);
 
-    button_elt8 = document.createElement('input');
-    button_elt8.setAttribute('type','button');
-    button_elt8.setAttribute('value','Energie Diff Chart');
+    let lien_8 = document.createTextNode('Energie Diff Chart');
+    button_elt8 = document.createElement('a');
+    button_elt8.setAttribute('href','#bloc_chart_e_diff');
     button_elt8.setAttribute('class', 'c_button');
     button_elt8.setAttribute('onclick','diff_chart("Energie - difference",e_diff,tab_elts,"bloc_chart_e_diff")');
+    button_elt8.appendChild(lien_8);
 
     bloc_button_e.appendChild(button_elt6);
     bloc_button_e.appendChild(button_elt7);
@@ -1611,27 +1785,30 @@ function fill(){
     document.getElementById('button_fill').appendChild(bloc_button_e);
 
 
-    button_elt9 = document.createElement('input');
-    
+
     let bloc_button_t = document.createElement('div');
     bloc_button_t.setAttribute('id','bloc_button_t');
 
-    button_elt9.setAttribute('type','button');
-    button_elt9.setAttribute('value','Temps entree Chart');
+    let lien_9 = document.createTextNode('Temps Entree Chart');
+    button_elt9 = document.createElement('a');    
+    button_elt9.setAttribute('href','#bloc_chart_t_entree');
     button_elt9.setAttribute('class', 'c_button');
     button_elt9.setAttribute('onclick','chart(t_entree,tab_elts,"bloc_chart_t_entree")');     
+    button_elt9.appendChild(lien_9);
 
-    button_elt10 = document.createElement('input');
-    button_elt10.setAttribute('type','button');
-    button_elt10.setAttribute('value','Temps Sortie Chart');
+    let lien_10 = document.createTextNode('Temps Sortie Chart');
+    button_elt10 = document.createElement('a');
+    button_elt10.setAttribute('href','#bloc_chart_t_sortie');
     button_elt10.setAttribute('class', 'c_button');
     button_elt10.setAttribute('onclick','chart(t_sortie,tab_elts,"bloc_chart_t_sortie")');     
+    button_elt10.appendChild(lien_10);
 
-    button_elt11 = document.createElement('input');
-    button_elt11.setAttribute('type','button');
-    button_elt11.setAttribute('value','Temps Diff Chart');
+    let lien_11 = document.createTextNode('Temps Diff Chart');
+    button_elt11 = document.createElement('a');
+    button_elt11.setAttribute('href','#bloc_chart_t_diff');
     button_elt11.setAttribute('class', 'c_button');
     button_elt11.setAttribute('onclick','diff_chart("Temps - difference",t_diff,tab_elts,"bloc_chart_t_diff")');
+    button_elt11.appendChild(lien_11);
 
     bloc_button_t.appendChild(button_elt9);
     bloc_button_t.appendChild(button_elt10);
@@ -1641,23 +1818,26 @@ function fill(){
     let bloc_button_1 = document.createElement('div');
     bloc_button_1.setAttribute('id','bloc_button_1');
 
-    button_elt12 = document.createElement('input');
-    button_elt12.setAttribute('type','button');
-    button_elt12.setAttribute('value','Argent Entree Bar');
-    button_elt12.setAttribute('class', 'c_button');
+    let lien_12 = document.createTextNode('Argent Entree Bar');
+    button_elt12 = document.createElement('a');
+    button_elt12.setAttribute('href','#bloc_bar_a_entree');
+    button_elt12.setAttribute('class', 'c_button_b');
     button_elt12.setAttribute('onclick','bar(a_entree,tab_elts,"Argent Entree Bar","bloc_bar_a_entree")'); 
+    button_elt12.appendChild(lien_12);
 
-    button_elt13 = document.createElement('input');
-    button_elt13.setAttribute('type','button');
-    button_elt13.setAttribute('value','Argent Sortie Bar');
-    button_elt13.setAttribute('class', 'c_button');
+    let lien_13 = document.createTextNode('Argent Sortie Bar');
+    button_elt13 = document.createElement('a');
+    button_elt13.setAttribute('href','#bloc_bar_a_sortie');
+    button_elt13.setAttribute('class', 'c_button_b');
     button_elt13.setAttribute('onclick','bar(a_sortie,tab_elts,"Argent Sortie Bar","bloc_bar_a_sortie")'); 
+    button_elt13.appendChild(lien_13);
 
-    button_elt14 = document.createElement('input');
-    button_elt14.setAttribute('type','button');
-    button_elt14.setAttribute('value','Energie Entree Bar');
-    button_elt14.setAttribute('class', 'c_button');
+    let lien_14 = document.createTextNode('Energie Entree Bar');
+    button_elt14 = document.createElement('a');
+    button_elt14.setAttribute('href','#bloc_bar_e_entree');
+    button_elt14.setAttribute('class', 'c_button_b');
     button_elt14.setAttribute('onclick','bar(e_entree,tab_elts,"Energie Entree Bar","bloc_bar_e_entree")');
+    button_elt14.appendChild(lien_14);
 
     bloc_button_1.appendChild(button_elt12);
     bloc_button_1.appendChild(button_elt13);
@@ -1666,23 +1846,28 @@ function fill(){
     let bloc_button_2 = document.createElement('div');
     bloc_button_2.setAttribute('id','bloc_button_2');
 
-    button_elt15 = document.createElement('input');
-    button_elt15.setAttribute('type','button');
-    button_elt15.setAttribute('value','Energie Sortie Bar');
-    button_elt15.setAttribute('class', 'c_button');
+    let lien_15 = document.createTextNode('Energie Sortie Bar');
+    button_elt15 = document.createElement('a');
+    button_elt15.setAttribute('href','#bloc_bar_e_sortie');
+    button_elt15.setAttribute('class', 'c_button_b');
     button_elt15.setAttribute('onclick','bar(e_sortie,tab_elts,"Energie Sortie Bar","bloc_bar_e_sortie")'); 
+    button_elt15.appendChild(lien_15);
 
-    button_elt16 = document.createElement('input');
-    button_elt16.setAttribute('type','button');
+
+    let lien_16 = document.createTextNode('Temps Entree Bar');
+    button_elt16 = document.createElement('a');
+    button_elt16.setAttribute('href','#bloc_bar_t_entree');
     button_elt16.setAttribute('value','Temps Entree Bar');
-    button_elt16.setAttribute('class', 'c_button');
+    button_elt16.setAttribute('class', 'c_button_b');
     button_elt16.setAttribute('onclick','bar(t_entree,tab_elts,"Temps Entree Bar","bloc_bar_t_entree")'); 
+    button_elt16.appendChild(lien_16);
 
-    button_elt17 = document.createElement('input');
-    button_elt17.setAttribute('type','button');
-    button_elt17.setAttribute('value','Temps Sortie Bar');
-    button_elt17.setAttribute('class', 'c_button');
+    let lien_17 = document.createTextNode('Temps Sortie Bar');
+    button_elt17 = document.createElement('a');
+    button_elt17.setAttribute('href','#bloc_bar_t_sortie');
+    button_elt17.setAttribute('class', 'c_button_b');
     button_elt17.setAttribute('onclick','bar(t_sortie,tab_elts,"Temps Sortie Bar","bloc_bar_t_sortie")');
+    button_elt17.appendChild(lien_17);
 
     bloc_button_2.appendChild(button_elt15);
     bloc_button_2.appendChild(button_elt16);
@@ -1731,7 +1916,7 @@ function fill(){
           document.getElementById(char_action).innerHTML = "besoin de  +" + adjust;
       }
   }
-
+  
   document.getElementById('a_total_entree').innerHTML = a_total_entree;
   document.getElementById('a_total_sortie').innerHTML = a_total_sortie;
   diff_1 = a_total_entree - a_total_sortie;
@@ -2194,12 +2379,17 @@ function family_fill(){
      button_elt.setAttribute('value','Calculer');
      button_elt.setAttribute('class','calcul');    
      button_elt.setAttribute('onclick','family_get_elts()');
+     button_elt.setAttribute('title','Calcule apres avoir entre manuellement des valeurs');
+
 
      button_elt2 = document.createElement('input');
      button_elt2.setAttribute('type', 'button');
      button_elt2.setAttribute('value', 'Random');
      button_elt2.setAttribute('class','random');
      button_elt2.setAttribute('onclick','family_generate()');
+     button_elt2.setAttribute('title','Calcule automatiquement');
+
+     
 
      calcul.appendChild(button_elt);
      calcul.appendChild(button_elt2);
@@ -2217,49 +2407,54 @@ function family_fill(){
      chart.appendChild(text_chart);
  
 
-    button_elt3 = document.createElement('input');
-    button_elt3.setAttribute('type','button');
-    button_elt3.setAttribute('value','Argent entree Chart');
+    let lien_3 = document.createTextNode('Argent Entree Chart');
+    button_elt3 = document.createElement('a');
+    button_elt3.setAttribute('href','#bloc_family_chart_a_entree');
     button_elt3.setAttribute('class', 'c_button');
     button_elt3.setAttribute('onclick','chart(a_entree,splitted_value_family,"bloc_family_chart_a_entree")');
+    button_elt3.appendChild(lien_3);
 
-    button_elt4 = document.createElement('input');
-    button_elt4.setAttribute('type','button');
-    button_elt4.setAttribute('value','Argent Sortie Chart');
+    let lien_4 = document.createTextNode('Argent Sortie Chart');
+    button_elt4 = document.createElement('a');
+    button_elt4.setAttribute('href','#bloc_family_chart_a_sortie');
     button_elt4.setAttribute('class', 'c_button');
     button_elt4.setAttribute('onclick','chart(a_sortie,splitted_value_family,"bloc_family_chart_a_sortie")');
-    
-     
-     button_elt5 = document.createElement('input');
-     button_elt5.setAttribute('type','button');
-     button_elt5.setAttribute('value','Argent Diff Chart');
+    button_elt4.appendChild(lien_4);
+
+     let lien_5 = document.createTextNode('Argent Diff Chart');
+     button_elt5 = document.createElement('a');
+     button_elt5.setAttribute('href','#bloc_family_chart_a_diff');
      button_elt5.setAttribute('class', 'c_button');
      button_elt5.setAttribute('onclick','diff_chart("Famille Argent difference",a_diff,splitted_value_family,"bloc_family_chart_a_diff")');
-     
+     button_elt5.appendChild(lien_5);
+
      family_button_a.appendChild(button_elt3);
      family_button_a.appendChild(button_elt4);
      family_button_a.appendChild(button_elt5);
     
      let family_button_e = document.createElement('div');
      family_button_e.setAttribute('id','family_button_e');
-
-     button_elt6 = document.createElement('input');
-     button_elt6.setAttribute('type','button');
-     button_elt6.setAttribute('value','Energie entree Chart');
+     
+     let lien_6 = document.createTextNode('Energie Entree Chart');
+     button_elt6 = document.createElement('a');
+     button_elt6.setAttribute('href','#bloc_family_chart_e_entree');
      button_elt6.setAttribute('class', 'c_button');
      button_elt6.setAttribute('onclick','chart(e_entree,splitted_value_family,"bloc_family_chart_e_entree")');
- 
-     button_elt7 = document.createElement('input');
-     button_elt7.setAttribute('type','button');
-     button_elt7.setAttribute('value','Energie Sortie Chart');
+     button_elt6.appendChild(lien_6);
+
+     let lien_7 = document.createTextNode('Energie Sortie Chart');
+     button_elt7 = document.createElement('a');
+     button_elt7.setAttribute('href','#bloc_family_chart_e_sortie');
      button_elt7.setAttribute('class', 'c_button');
      button_elt7.setAttribute('onclick','chart(e_sortie,splitted_value_family,"bloc_family_chart_e_sortie")');
- 
-     button_elt8 = document.createElement('input');
-     button_elt8.setAttribute('type','button');
-     button_elt8.setAttribute('value','Energie Diff Chart');
+     button_elt7.appendChild(lien_7);
+
+     let lien_8 = document.createTextNode('Argent Diff Chart');
+     button_elt8 = document.createElement('a');
+     button_elt8.setAttribute('href','#bloc_family_chart_e_diff');
      button_elt8.setAttribute('class', 'c_button');
      button_elt8.setAttribute('onclick','diff_chart("Famille Energie difference",e_diff,splitted_value_family,"bloc_family_chart_e_diff")');
+     button_elt8.appendChild(lien_8);
 
      family_button_e.appendChild(button_elt6);
      family_button_e.appendChild(button_elt7);
@@ -2268,23 +2463,27 @@ function family_fill(){
      let family_button_t = document.createElement('div');
      family_button_t.setAttribute('id','family_button_t');
 
-     button_elt9 = document.createElement('input');
-     button_elt9.setAttribute('type','button');
-     button_elt9.setAttribute('value','Temps entree Chart');
+     let lien_9 = document.createTextNode('Temps Entree Chart');
+     button_elt9 = document.createElement('a');
+     button_elt9.setAttribute('href','#bloc_family_chart_t_entree');
      button_elt9.setAttribute('class', 'c_button');
      button_elt9.setAttribute('onclick','chart(t_entree,splitted_value_family,"bloc_family_chart_t_entree")');
- 
-     button_elt10 = document.createElement('input');
-     button_elt10.setAttribute('type','button');
-     button_elt10.setAttribute('value','Temps Sortie Chart');
+     button_elt9.appendChild(lien_9);
+
+
+     let lien_10 = document.createTextNode('Temps Sortie Chart');
+     button_elt10 = document.createElement('a');
+     button_elt10.setAttribute('href','#bloc_family_chart_t_sortie');
      button_elt10.setAttribute('class', 'c_button');
      button_elt10.setAttribute('onclick','chart(t_sortie,splitted_value_family,"bloc_family_chart_t_sortie")');
- 
-     button_elt11 = document.createElement('input');
-     button_elt11.setAttribute('type','button');
-     button_elt11.setAttribute('value','Temps Diff Chart');
+     button_elt10.appendChild(lien_10);
+
+     let lien_11 = document.createTextNode('Temps Diff Chart');
+     button_elt11 = document.createElement('a');
+     button_elt11.setAttribute('href','#bloc_family_chart_t_diff');
      button_elt11.setAttribute('class', 'c_button');
      button_elt11.setAttribute('onclick','diff_chart("Famille Temps difference",t_diff,splitted_value_family,"bloc_family_chart_t_diff")');
+     button_elt11.appendChild(lien_11);
      
      family_button_t.appendChild(button_elt9);
      family_button_t.appendChild(button_elt10);
@@ -2293,23 +2492,27 @@ function family_fill(){
      let bloc_button_1 = document.createElement('div');
      bloc_button_1.setAttribute('id','bloc_button_1');
  
-     button_elt12 = document.createElement('input');
-     button_elt12.setAttribute('type','button');
-     button_elt12.setAttribute('value','Argent Entree Bar');
+
+     let lien_12 = document.createTextNode('Argent Entree Bar');
+     button_elt12 = document.createElement('a');      
+     button_elt12.setAttribute('href','#bloc_family_bar_a_entree');
      button_elt12.setAttribute('class', 'c_button');
      button_elt12.setAttribute('onclick','bar(a_entree,splitted_value_family,"Argent Entree Bar","bloc_family_bar_a_entree")');
- 
-     button_elt13 = document.createElement('input');
-     button_elt13.setAttribute('type','button');
-     button_elt13.setAttribute('value','Argent Sortie Bar');
+     button_elt12.appendChild(lien_12);
+    
+     let lien_13 = document.createTextNode('Argent Sortie Bar');
+     button_elt13 = document.createElement('a');
+     button_elt13.setAttribute('href','#bloc_family_bar_a_sortie');
      button_elt13.setAttribute('class', 'c_button');
      button_elt13.setAttribute('onclick','bar(a_sortie,splitted_value_family,"Argent Sortie Bar","bloc_family_bar_a_sortie")'); 
- 
-     button_elt14 = document.createElement('input');
-     button_elt14.setAttribute('type','button');
-     button_elt14.setAttribute('value','Energie Entree Bar');
+     button_elt13.appendChild(lien_13);
+
+     let lien_14 = document.createTextNode('Energie Entree Bar');
+     button_elt14 = document.createElement('a');     
+     button_elt14.setAttribute('href','#bloc_family_bar_e_entree');
      button_elt14.setAttribute('class', 'c_button');
      button_elt14.setAttribute('onclick','bar(e_entree,splitted_value_family,"Energie Entree Bar","bloc_family_bar_e_entree")');
+     button_elt14.appendChild(lien_14);
 
      bloc_button_1.appendChild(button_elt12);
      bloc_button_1.appendChild(button_elt13);
@@ -2318,24 +2521,28 @@ function family_fill(){
      let bloc_button_2 = document.createElement('div');
      bloc_button_2.setAttribute('id','bloc_button_2');
  
-     button_elt15 = document.createElement('input');
-     button_elt15.setAttribute('type','button');
-     button_elt15.setAttribute('value','Energie Sortie Bar');
+
+     let lien_15 = document.createTextNode('Energie Sortie Bar');
+     button_elt15 = document.createElement('a');
+     button_elt15.setAttribute('href','#bloc_family_bar_e_sortie');
      button_elt15.setAttribute('class', 'c_button');
      button_elt15.setAttribute('onclick','bar(e_sortie,splitted_value_family,"Energie Sortie Bar","bloc_family_bar_e_sortie")'); 
- 
-     button_elt16 = document.createElement('input');
-     button_elt16.setAttribute('type','button');
-     button_elt16.setAttribute('value','Temps Entree Bar');
+     button_elt15.appendChild(lien_15);
+
+     let lien_16 = document.createTextNode('Temps Entree Bar');
+     button_elt16 = document.createElement('a');
+     button_elt16.setAttribute('href','#bloc_family_bar_t_entree');
      button_elt16.setAttribute('class', 'c_button');
      button_elt16.setAttribute('onclick','bar(t_entree,splitted_value_family,"Temps Entree Bar","bloc_family_bar_t_entree")'); 
- 
-     button_elt17 = document.createElement('input');
-     button_elt17.setAttribute('type','button');
-     button_elt17.setAttribute('value','Temps Sortie Bar');
+     button_elt16.appendChild(lien_16);
+
+     let lien_17 = document.createTextNode('Temps Sortie Bar');
+     button_elt17 = document.createElement('a');
+     button_elt17.setAttribute('href','#bloc_family_bar_t_sortie');
      button_elt17.setAttribute('class', 'c_button');
      button_elt17.setAttribute('onclick','bar(t_sortie,splitted_value_family,"Temps Sortie Bar","bloc_family_bar_t_sortie")');
- 
+     button_elt17.appendChild(lien_17);
+
      bloc_button_2.appendChild(button_elt15);
      bloc_button_2.appendChild(button_elt16);
      bloc_button_2.appendChild(button_elt17);
@@ -2499,6 +2706,7 @@ function inject(){
 
   let bloc_family_chart_a = document.createElement('div');
   bloc_family_chart_a.setAttribute('id','bloc_family_chart_a');
+  bloc_family_chart_a.classList.add('activate');
 
   let bloc_family_chart_a_entree = document.createElement('div');
   bloc_chart_a_entree.classList.add('deactivate');
@@ -2518,6 +2726,7 @@ function inject(){
   
   let bloc_family_chart_e = document.createElement('div');
   bloc_family_chart_e.setAttribute('id','bloc_family_chart_e');
+  bloc_family_chart_e.classList.add('activate');
   
   let bloc_family_chart_e_entree = document.createElement('div');
   bloc_family_chart_e_entree.classList.add('deactivate');
@@ -2537,6 +2746,8 @@ function inject(){
   
   let bloc_family_chart_t = document.createElement('div');
   bloc_family_chart_t.setAttribute('id','bloc_family_chart_t');
+  bloc_family_chart_t.classList.add('activate');
+
   let bloc_family_chart_t_entree = document.createElement('div');
   bloc_family_chart_t_entree.setAttribute('id','bloc_family_chart_t_entree');
   bloc_family_chart_t_entree.classList.add('deactivate');
@@ -2772,7 +2983,19 @@ function business_fill(){
  }
 }
 
-/* This function is going to generate a table based
+//This is the spec button for CSV report , inserted into a a function
+
+function spec_button(){
+  let spec_button = document.createElement('input');
+  spec_button.setAttribute('id','spec_button');
+  spec_button.setAttribute('value','CSV Report');
+  spec_button.setAttribute('type','button');  
+  spec_button.setAttribute('onclick','from_id_to_bloc_to_csv()');
+
+  document.getElementById('myDiv').appendChild(spec_button);
+}
+
+/* This Fadfunction is going to generate a table based
  on the informations problankd in the questionnaire. Only personal
  user modifiers and business might appear. no family
   and friends. Case 1 : Family => 0 , Friends => 0*/
@@ -2780,12 +3003,17 @@ function business_fill(){
 let for_friend_validate = false;
 let for_family_validate = false;
 
+let bool_for_case1 = false, bool_for_case2 = false, bool_for_case3 = false, bool_for_case4 = false;
+
 function generate_informations_case1(){
   for_friend_validate = true;
   for_family_validate = true;
-
+  bool_for_case1 = true;
   inject();
   fill();
+
+  spec_button();
+
 }
 
 
@@ -2797,9 +3025,14 @@ function generate_informations_case1(){
 
 function generate_informations_case2(){
   for_friend_validate = true;
+  bool_for_case2 = true;
+  elt1 = document.getElementById('family_members').value;
   inject();
   fill();
   family_fill();
+
+
+  spec_button();
 }
 
 /* This function is going to generate a table based
@@ -2808,9 +3041,13 @@ function generate_informations_case2(){
   but not family. Case 3 : Family => No , Friends => Yes*/
   function generate_informations_case3(){
     for_family_validate = true;
+    bool_for_case3 = true;
+    elt2 = document.getElementById('friends_members').value;
     inject();
     fill();
     friends_validate();
+
+    spec_button();
   }
 
 
@@ -2819,10 +3056,13 @@ function generate_informations_case2(){
  user modifiers and business might appear, also friends
  and family. Case 4 : Family => Yes , Friends => Yes*/
   function generate_informations_case4(){
+    bool_for_case4 = true;
     inject();
     fill();
     family_fill();
     friends_validate();
+
+    spec_button();
   }
 
 
@@ -3538,8 +3778,8 @@ function friends_validate(){
        total_tr.appendChild(total);
        total_tr.appendChild(a_total_entree);
        total_tr.appendChild(a_total_sortie);
-       total_tr.appendChild(action_1);
        total_tr.appendChild(diff_1);
+       total_tr.appendChild(action_1);
        total_tr.appendChild(e_total_entree);
        total_tr.appendChild(e_total_sortie);
        total_tr.appendChild(diff_2);
@@ -3591,12 +3831,14 @@ function friends_validate(){
           button_elt.setAttribute('value','Calculer');
           button_elt.setAttribute('class','calcul');
           button_elt.setAttribute('onclick','friends_elts()');
+          button_elt.setAttribute('title','Calcule apres avoir entre manuellement des valeurs');
           
           button_elt2 = document.createElement('input');
           button_elt2.setAttribute('type', 'button');
           button_elt2.setAttribute('value', 'Random');
           button_elt2.setAttribute('class','random');
           button_elt2.setAttribute('onclick','friends_generate()');
+          button_elt2.setAttribute('title','Calcule automatiquement');
 
           calcul.appendChild(button_elt);
           calcul.appendChild(button_elt2);
