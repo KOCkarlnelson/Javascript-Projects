@@ -1272,25 +1272,26 @@ function bar(table,libelle_table,name,id){
 function chart(_input,tableau,num){
   let test = _input;
   var data = [{
-    values: _input,
+    values: test,
     labels: tableau,
     type: 'pie'
   }];
 
-  console.log(_input[0]);
-  console.log(tableau[0]);
 
   var layout = {
-    height: 270,
-    width: 350
+    height:270,
+    width: 350 //350
   };
 
+
+    console.log(_input);
+    console.log(tableau)
+  
+ 
   document.getElementById(num).classList.add('activate');
   document.getElementById(num).classList.remove('deactivate');
   document.getElementById(num).style.marginTop = "20px";
 
-  document.getElementById('bloc_family_chart_a_entree').classList.add('activate');
-  document.getElementById('bloc_family_chart_a_entree').classList.remove('deactivate');
   Plotly.newPlot(num, data, layout);
 
 }
@@ -1320,6 +1321,7 @@ function fill(){
 
 
   ligne = tab_elts.length;
+  let adjustable_table ;
   let colonne = 14;
   let state_business = false;
   ligne_up = ligne + MAX_MAX;
@@ -1428,6 +1430,13 @@ function fill(){
   special_banner.style.backgroundColor = 'grey';
 
     if(table_rep_questions[2] == "Oui"){
+
+      // We redefine tab_elts size
+
+      for(let i = 0; i < business_entries.length; i++){
+        tab_elts.push(business_entries[i]);
+      }
+
       state_business = true;
       k=0;
       n=0;
